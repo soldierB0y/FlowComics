@@ -88,6 +88,7 @@ export const Navegador =()=>{
             
 
           </ul>
+          {userInfo?<p className={'text-white items-center hidden lg:flex'}>{userInfo.nombre}</p>:<></>}
           <img className='w-8 h-8 self-center object-cover invert hover:cursor-pointer' draggable='false' src={userPic}
             onClick={()=>{
               if(profileDisplay=='flex')

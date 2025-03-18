@@ -1,9 +1,9 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { UseUrl } from "./urlGlobal";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "./userGlobal";
 
-
+var token= null;
 
 async function validarInicioSesion(credenciales,url)
 {
@@ -20,7 +20,7 @@ async function validarInicioSesion(credenciales,url)
     if (resultado.ok)
     {
         const data= await resultado.json();
-
+         token= data.token; 
         return data.userData;
     }
     else 
@@ -30,11 +30,17 @@ async function validarInicioSesion(credenciales,url)
 
 export const InicioSesion= ()=>{
     const {userInfo,setUserinfo}= useUser();
+    const {userToken,setUserToken}=useUser()
     const navigator= useNavigate();
     const {url}= UseUrl();
     const [errCampos,setErrCampos]=  useState('hidden');
     const [errCredenciales,setErrCredenciales]= useState('hidden');
     const [credenciales,setCredenciales]= useState({username:'',password:''});
+    
+    useEffect(()=>{
+        setUserToken(token);
+    },[userInfo])
+
 
     return(<>
         <section className="w-full h-screen bg-white flex items-start justify-center pt-10">
@@ -59,7 +65,7 @@ export const InicioSesion= ()=>{
                         else
                         {
                             setErrCampos('hidden');
-                            console.log('Credenciales',credenciales);
+                            //console.log('Credenciales',credenciales);
                             (async ()=>{
                                 const result= await validarInicioSesion(credenciales,url);
                                 if (!result)

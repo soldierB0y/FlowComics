@@ -1,12 +1,14 @@
-import { useState } from "react"
-import search from '../assets/imgs/search.png'
+import { useState } from "react";
+import search from '../assets/imgs/search.png';
+import close from '../assets/imgs/close.png';
+import { useNavigate } from "react-router-dom";
 
 export const Buscador= ()=>{
 
     const [buscadorValue,setBuscadorValue]=useState('')
     const [showModal,setShowModal]= useState('hidden');
     const [searchButton,setSearchButton]= useState('block')
-
+    const navigator= useNavigate();
 
     return(
         <>
@@ -34,16 +36,29 @@ export const Buscador= ()=>{
                         }
                     }}
                 ></img>
-                <div className={"w-4xl h-75 rounded-2xl h-50 bg-slate-100 relative overflow-hidden "+showModal} >
+                <div className={"w-4xl  rounded-2xl  bg-slate-100 relative overflow-hidden flex-row items-center "+showModal} >
+                    <img 
+                        onClick={()=>{
+                            setBuscadorValue('');
+                            setShowModal('hidden')
+                            setSearchButton('flex');
+                        }}
+                    
+                    src={close} draggable='false' className="w-3  ml-5 h-3 top-4 absolute invert-50 cursor-pointer" ></img>
                     <span className="w-full flex flex-row gap-1">
-                        <input type="text" value={buscadorValue} placeholder="Buscar..." className="text-slate-600 p-5 text-xl tracking-wide bg-slate-200 h-10 w-full border-sky-300 border-none outline-none"
+                        <input  type="text" value={buscadorValue} placeholder="Buscar..." className="text-slate-600 p-5 pl-10 text-xl tracking-wide bg-slate-200 h-10 w-full border-sky-300 border-none outline-none"
                             onChange={
                                 (e)=>{
                                     setBuscadorValue(e.target.value)
                                 }
                             }
                         ></input>
-                        <button className="bg-red-500 h-10 w-50 text-white rounded-lg hover:cursor-pointer hover:bg-red-400">Buscar</button>
+                        <button className="bg-red-500 h-10 w-50 text-white rounded-lg hover:cursor-pointer hover:bg-red-400"
+                            onClick={()=>{
+                                if(buscadorValue != '')
+                                    navigator('/buscador')
+                            }}
+                        >Buscar</button>
                     </span>
                 </div>
 

@@ -7,7 +7,7 @@ import { Navegador } from './componenetes/navegador.jsx';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { UserProvider } from './componenetes/userGlobal.jsx';
 import { Panel } from './componenetes/panel.jsx';
-import { PanelInicio } from './componenetes/panel.jsx';
+import { ContenedorBuscador } from './componenetes/contenedorBuscador.jsx';
 
 
 function App() {
@@ -20,6 +20,7 @@ function App() {
             <Route path='/' element={<Inicio/>}/>
             <Route path='/login' element={<InicioSesion/>}/>
             <Route path='/panel' element={<Panel/>}/>
+            <Route path='/buscador' element={<ContenedorBuscador/>}/>
           </Routes>
         </UrlProvider>
       </UserProvider>

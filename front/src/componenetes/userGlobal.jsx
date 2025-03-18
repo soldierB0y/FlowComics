@@ -13,8 +13,9 @@ export const useUser=()=>
 
 export const UserProvider=({children})=>{
     const [userInfo,setUserinfo]= useState({});
+    const [userToken,setUserToken]=useState(null);
     return(
-        <userContext.Provider value={{userInfo,setUserinfo}}>
+        <userContext.Provider value={{userInfo,setUserinfo,userToken,setUserToken}}>
             {children}
         </userContext.Provider>
     )

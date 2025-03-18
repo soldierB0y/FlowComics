@@ -38,7 +38,44 @@ export const getLibros = async (req, res) => {
     }
 };
 
+
+export const crearLibro= async (req,res)=>{
+    try {
+        const {titulo,autor,precioVenta,precioOferta,costoProduccion,categorias,ancho,alto,paginas,cantidad,img}= req.body;
+        if(!titulo)
+            throw new Error("Debe proporcionar un producto");
+        else
+        {
+            libroModel.create({
+                titulo: titulo,
+                autor: autor,
+                precioVenta:precioVenta,
+                precioOferta:precioOferta,
+                costoProduccion:costoProduccion,
+                categorias:categorias,
+                ancho:ancho,
+                alto:alto,
+                paginas:paginas,
+                cantidad:cantidad,
+                fechaCreacion:Date.now(),
+                fechaModificacion:Date.now(),
+                img:img
+            });
+
+            res.status(201).json({message:'Registrado exitosamente'});
+        }
+
+
+    } catch (error) {
+        res.status(400).json({ Error:error.message});
+        console.log(error);
+    }
+}
+
+
+
 export const middlewareAutorizacion = (req, res, next) => {
+    console.log(Date.now());
     const tokenAValidar = req.headers['authorization'];
     if (validateToken(tokenAValidar)) {
         next();

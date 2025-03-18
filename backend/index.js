@@ -7,6 +7,7 @@ const app= express();
 app.use(cors());
 //router
 app.get('/',(req,res)=>{res.send('<h1>Documentacion</h1>')})
+app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 app.use('/',Router);
 
