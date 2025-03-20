@@ -14,8 +14,11 @@ export const useUser=()=>
 export const UserProvider=({children})=>{
     const [userInfo,setUserinfo]= useState({});
     const [userToken,setUserToken]=useState(null);
+    const [carritoItems, setCarritoItems]= useState([]);
+    const [carritoVisible, setCarritoVisible]= useState('hidden');
+
     return(
-        <userContext.Provider value={{userInfo,setUserinfo,userToken,setUserToken}}>
+        <userContext.Provider value={{userInfo,setUserinfo,userToken,setUserToken,carritoItems,setCarritoItems,carritoVisible,setCarritoVisible}}>
             {children}
         </userContext.Provider>
     )

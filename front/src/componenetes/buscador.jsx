@@ -25,7 +25,7 @@ export const Buscador= ()=>{
                     
                     */
                 }
-                <img draggable='false' className={"w-7 h-7 object-cover hover:cursor-pointer select-none self-start absolute left-4 lg:left-40 "+searchButton} src={search}
+                <img draggable='false' className={"w-7 h-7 object-cover hover:cursor-pointer select-none self-start absolute left-4 lg:left-40 z-999 "+searchButton} src={search}
                     onClick={()=>{
                         if (showModal=='flex')
                             setShowModal('hidden')

@@ -8,6 +8,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { UserProvider } from './componenetes/userGlobal.jsx';
 import { Panel } from './componenetes/panel.jsx';
 import { ContenedorBuscador } from './componenetes/contenedorBuscador.jsx';
+import { Carrito } from './componenetes/carrito.jsx';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <UserProvider>
         <UrlProvider>
           <Navegador />
+          <Carrito/>
           <Routes>
             <Route path='/' element={<Inicio/>}/>
             <Route path='/login' element={<InicioSesion/>}/>

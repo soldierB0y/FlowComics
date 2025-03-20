@@ -2,6 +2,8 @@ import express from 'express';
 import Router from './router.js';
 import { DB } from './db.js';
 import cors from 'cors';
+import multer from 'multer';
+
 
 const app= express();
 app.use(cors());

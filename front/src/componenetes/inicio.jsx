@@ -1,4 +1,5 @@
 import { Buscador } from "./buscador"
+import { Carrito } from "./carrito"
 
 
 export const Inicio=()=>{

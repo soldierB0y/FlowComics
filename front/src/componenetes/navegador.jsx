@@ -11,10 +11,27 @@ import { useUser } from './userGlobal'
 export const Navegador =()=>{
   //desestructuramos userinfo de userGlobal para obtener los valores
   const {userInfo,setUserinfo}= useUser();
-
+  const {carritoVisible,setCarritoVisible}=useUser();
+  const {carritoItems,setCarritoItems}= useUser();
   const navigator= useNavigate();
   const [menuDisplay,setMenuDisplay]= useState('hidden');
   const [profileDisplay,setProfileDisplay]= useState('hidden');
+  const [cantidadItems, setCantidadItems]= useState(0);
+
+  useEffect(()=>{
+
+    var x=0; 
+
+    carritoItems.map(item=>{
+    
+      x+= 1
+    })
+
+    console.log(x);
+
+    setCantidadItems(x)
+  },[carritoItems])
+
 
     return(
         <nav className='bg-slate-900 p-5 flex flex-row justify-start w-full relative lg:justify-around h-50px'>
@@ -23,6 +40,7 @@ export const Navegador =()=>{
             navigator('/')
             setMenuDisplay('hidden')
             setProfileDisplay('hidden')
+
           }}
         >FlowComics</h1>
         <div className='flex content-center justify-center flex-row self-center w-full lg:justify-around gap-10'>
@@ -37,6 +55,7 @@ export const Navegador =()=>{
               {
                 setMenuDisplay('hidden');
                 setProfileDisplay('hidden')
+                setCarritoVisible('hidden')
     
               }
               else
@@ -44,10 +63,30 @@ export const Navegador =()=>{
                 setMenuDisplay('flex');
                 setProfileDisplay('hidden')
               }
+
+              setCarritoVisible('hidden');
             }}
           ></img>
-          <img className='w-8 h-8 self-center object-cover invert hover:cursor-pointer' src={shopping}></img>
-          <ul className={'overflow-hidden z-1000 text-stone-300 bg-gray-200 flex-col absolute rounded-md top-20 right-2 mr-4 '+profileDisplay}>
+
+            <span className='relative flex items-center justify-center w-8 h-15 flex items-center justify-center'>
+              <img className='w-8 h-8 min-w-8 self-center object-cover invert hover:cursor-pointer z-50' src={shopping}
+                onClick={()=>{
+                  if (carritoVisible=='flex')
+                    setCarritoVisible('hidden');
+                  else
+                  {
+                    setCarritoVisible('flex');
+                  }
+
+                  setMenuDisplay('hidden');
+                  setProfileDisplay('hidden');
+                }}
+              ></img>
+              <span className={'text-white absolute w-5 h-5 rounded-md bg-red-500  flex items-center justify-center z-1000 pointer-events-none top-3 left-3'}>{cantidadItems}</span>
+
+            </span>
+
+          <ul className={'z-1001 overflow-hidden  text-stone-300 bg-gray-200 flex-col absolute rounded-md top-20 right-2 mr-4 '+profileDisplay}>
             {
               !userInfo.username?
               <>
@@ -91,6 +130,8 @@ export const Navegador =()=>{
           {userInfo?<p className={'text-white items-center hidden lg:flex'}>{userInfo.nombre}</p>:<></>}
           <img className='w-8 h-8 self-center object-cover invert hover:cursor-pointer' draggable='false' src={userPic}
             onClick={()=>{
+              setCarritoVisible('hidden');
+
               if(profileDisplay=='flex')
                 {
                   setProfileDisplay('hidden');
@@ -100,6 +141,7 @@ export const Navegador =()=>{
                   setProfileDisplay('flex');
                   setMenuDisplay('hidden');
                 }
+                setCarritoVisible('hidden');
             }}
           ></img>
         </div>
